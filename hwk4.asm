@@ -173,8 +173,8 @@ get_book:
 	
 	#store stuff on the stack
 	addi $sp, $sp, -8
-	sw $t2, 0($sp) #store the expected position							36
-	sw $s0, 4($sp) #store the base address of the hashtable on the stack				40
+	sw $t2, 0($sp) #store the expected position							
+	sw $s0, 4($sp) #store the base address of the hashtable on the stack				
 	
 	
 
@@ -192,13 +192,13 @@ get_book:
 		move $a0, $s5 #string1
 		move $a1, $s1 #string 2
 		jal strcmp
-												#####################
+												
 		lb $t0, 0($s5) #if its empty aka = 0, then USE S7 TO DETERMINE
 		bgtz $s7, found_empty_already 
 		addi $s7, $s7, -1
 		beqz $t0, found_empty_linear
 		found_empty_already: #have to worry about counting position, s6 will track this for us
-		beqz $v0, found_ISBN									################
+		beqz $v0, found_ISBN									
 		addi $s6, $s6, 1
 		add $s5, $s5, $s4 #next element
 		blt $s6, $s2, expected_to_end_loop
@@ -217,14 +217,14 @@ get_book:
 		j finished_looping_book
 	
 	beginning_to_expected_loop:
-		lw $s6, 0($sp) #load the expected position							36
-		lw $s5, 4($sp) #load hashtable off stack							40
+		lw $s6, 0($sp) #load the expected position							
+		lw $s5, 4($sp) #load hashtable off stack							
 		addi $s5, $s5, 12 #beginning of the elements
 		actual_start_of_loop:
 			move $a0, $s5 #string1
 			move $a1, $s1 #string 2
 			jal strcmp
-														######################
+														
 			lb $t0, 0($s5) #if its empty aka = 0, then USE S7 TO DETERMINE
 			bgtz $s7, found_empty_already_part2 
 			addi $s7, $s7, -1
@@ -327,8 +327,8 @@ add_book:
 	
 		check_from_beginning_to_expected_add_book: #until s4
 			li $s6, 0
-			move $s5, $s0											#################################
-			addi $s5, $s5, 12												########################
+			move $s5, $s0											
+			addi $s5, $s5, 12												
 			check_from_beginning_to_end_add_book_actual_loop:
 			lb $t0, 0($s5) #if its empty aka = 0, then USE S7 TO DETERMINE
 			addi $s7, $s7, 1
@@ -819,8 +819,8 @@ sell_book:
 	move $s1, $a1 #books structure
 	move $s2, $a2 #ISBN
 	move $s3, $a3 #customer ID
-	#lw $s4, 0($sp) #sale date								#USE LATER
-	#lw $s5, 4($sp) #sale price 								#USE LATER
+	#lw $s4, 0($sp) #sale date								
+	#lw $s5, 4($sp) #sale price 								
 	
 	lw $t0, 0($s0) #capacity
 	lw $t1, 4($s0) #current size
@@ -861,8 +861,8 @@ sell_book:
 
 		check_from_beginning_to_expected_sell_book: #until s4
 			li $s6, 0
-			move $s5, $s0											#################################
-			addi $s5, $s5, 12												########################
+			move $s5, $s0											
+			addi $s5, $s5, 12												
 			check_from_beginning_to_end_sell_book_actual_loop:
 			lb $t0, 0($s5) #if its empty aka = 0, then USE S7 TO DETERMINE
 			addi $s7, $s7, 1
@@ -922,7 +922,7 @@ sell_book:
 			#move $a1, $s3 #customer id
 			#li $a2, 4 # 4 bytes copying
 			#jal memcpy
-			sw $s3, 0($s5)				#customer ID					 I HAVE TO ASK A TA IF THIS IS A VALID WAY OF STORING IT.
+			sw $s3, 0($s5)				
 			#date days
 			
 			
@@ -931,7 +931,7 @@ sell_book:
 			#move $a0, $s5
 			sw $t8, 0($s5)
 			addi $s5, $s5, 4
-			#move $a1, $s4 #date days									##########################################
+			#move $a1, $s4 #date days							
 			#li $a2, 4
 			#jal memcpy
 			#addi $s5, $s5, 4
